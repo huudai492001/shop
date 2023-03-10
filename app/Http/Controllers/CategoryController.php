@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -14,7 +15,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+
+        $categories=Category::get();
+//        biến $categories sẽ lấy đữ liệu trong model Category và xét điều kiện thuộc tính status bằng 1 và get nó ra có thể dùng dòng 1
+//        $categories = Category::where('status', '1')->get();
+        return view('admin.category.list', compact('categories'));
+
     }
 
     /**
@@ -22,9 +28,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create(){
+        $categories = Category::whereNull('category_id')->get();
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -35,8 +41,16 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data =array(
+            'name'=> $request->name,
+            'category_id'=>$request->category_id
+        );
+//        dd($data);
+        $create = Category::create($data);
+        return redirect()->route('admin.create');
+
     }
+
 
     /**
      * Display the specified resource.
@@ -46,7 +60,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+
     }
 
     /**
@@ -55,9 +69,13 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Request $request, Category $category)
     {
-        //
+        $id = $request->id;
+        $categories = Category::whereNull('category_id')->get();
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category', 'categories'));
+
     }
 
     /**
@@ -69,7 +87,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $id = $request->id;
+        $data = array(
+          'name'=> $request->name,
+            'category_id' =>$request->category_id,
+        );
+//        dd($data);
+        $category = Category::find($id);
+        $category->update($data);
+        return redirect()->route('admin.list');
     }
 
     /**
@@ -78,8 +104,13 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Request $request ,Category $category)
     {
-        //
+        $id = $request->id;
+        $category= Category::find($id);
+        $category->delete();
+        return response()->json('success');
+
+
     }
 }

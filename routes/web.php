@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\AdminController;
-\App\Http\Middleware\Authenticate::class;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +34,17 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/admin/dashboard',[AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
 });
+
+//Category Controller
+Route::get('category/add',[CategoryController::class, 'create'])->name('admin.create');
+Route::post('category/add',[CategoryController::class, 'store'])->name('admin.store');
+
+
+Route::get('category/list',[CategoryController::class, 'index'])->name('admin.list');
+Route::get('category/edit/{id}',[CategoryController::class, 'edit'])->name('admin.edit');
+Route::post('category/update/{id}',[CategoryController::class, 'update'])->name('admin.update');
+Route::post('category/delete',[CategoryController::class, 'destroy'])->name('admin.delete');
+
+
 
 

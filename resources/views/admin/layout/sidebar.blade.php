@@ -30,8 +30,19 @@
                 </ul>
             </li>
         </ul>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-home"></i> Category Manager <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{route('admin.list')}}">Category list</a></li>
+                    <li><a href="{{route('admin.create')}}">Category create</a></li>
+
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
+
+
 <div class="sidebar-footer hidden-small">
     <a data-toggle="tooltip" data-placement="top" title="Settings">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
