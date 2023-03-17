@@ -43,7 +43,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $data = array(
-          'name'=> $request->name,
+            'name'=> $request->name,
             'category_id'=> $request->category_id,
             'price'=>$request->price,
         );
@@ -105,7 +105,7 @@ class ProductController extends Controller
             $data['image'] = $fileName;
         }
 //        dd($data);
-          $products = Product::where('id', $id)->update($data);
+        $products = Product::where('id', $id)->update($data);
         return redirect()->route('product.list');
     }
 
@@ -131,7 +131,7 @@ class ProductController extends Controller
     public function extraDetailsStore(Request $request){
         $id = $request->id;
         $data =array(
-          'title' => $request->title,
+            'title' => $request->title,
             'product_id' => $request ->id,
             'total_items' => $request->total_item,
             'description' => $request->description

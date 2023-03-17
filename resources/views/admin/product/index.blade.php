@@ -7,20 +7,20 @@
     @endif
     <table class="table table-striped table-bordered">
         <thead>
-            <tr>
-                <th>S.no</th>
-                <th>Product Name</th>
-                <th>Category Name</th>
-                <th>Price</th>
-                <th>Image</th>
-                <th>Product Detail</th>
-                <th>Action</th>
+        <tr>
+            <th>S.no</th>
+            <th>Product Name</th>
+            <th>Category Name</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Product Detail</th>
+            <th>Action</th>
 
-            </tr>
+        </tr>
         </thead>
         <tbody>
         @php
-        $i = 1
+            $i = 1
         @endphp
         @foreach($products as $product)
             <tr>
