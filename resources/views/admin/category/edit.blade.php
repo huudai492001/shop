@@ -44,12 +44,14 @@
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select type="text" id="first-name" name="category_id"  class="form-control col-md-7 col-xs-12">
+                                        <select  name="category_id"  class="form-control col-md-7 col-xs-12">
                                             <option value=""
-                                            @if($category->category_id==null) selected @endif>No Subcategory </option>
+                                            @if($category->category_id==null) selected @endif>Category Name</option>
                                             @foreach($categories as $categories)
-                                                <option value="{{$categories->id}}"  @if($category->category_id != null &&
-                                                $category->category_id ==$categories->id) selected @endif>{{$categories->name}}</option>
+                                                <option value="{{$categories->id}}"
+                                                        @if($product->category_id==$categories->id)selected @endif>
+
+                                                </option>
 
                                             @endforeach
                                         </select>

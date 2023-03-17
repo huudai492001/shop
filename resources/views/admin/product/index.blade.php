@@ -1,5 +1,10 @@
 @extends('admin.layout.layout')
 @section('content')
+    @if(\Illuminate\Support\Facades\Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{\Illuminate\Support\Facades\Session::get('success')}}
+        </div>
+    @endif
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
@@ -8,15 +13,18 @@
                 <th>Category Name</th>
                 <th>Price</th>
                 <th>Image</th>
+                <th>Product Detail</th>
                 <th>Action</th>
 
             </tr>
         </thead>
         <tbody>
-
-        @foreach($products as $key=>$product)
+        @php
+        $i = 1
+        @endphp
+        @foreach($products as $product)
             <tr>
-                <td>{{$key +1}}</td>
+                <td>{{$i++}}</td>
                 <td>{{$product->name}}</td>
                 <td>
                     @if($product->category_id)
@@ -24,10 +32,22 @@
                     @endif
                 </td>
                 <td>{{$product->price}}</td>
+
                 <td>
                     <img style="height: 80px ; width: 80px" src="{{asset('upload/'.$product->image)}}">
-                </td>   <td>
+                </td>
+                <td ><button class="btn btn-primary">
+                        <a style="color:black" href="{{route('details', $product->id)}}">
+                            Add Detail Product
+                        </a>
+
+                    </button>
+                </td>
+                <td>
                     <a href="{{route('product.edit', $product->id)}}" style="font-size: 25px; padding: 5px"> <i class="fa fa-edit"></i></a>
+                    |
+                    <a href="{{route('product.delete', $product->id)}}" style="font-size: 25px; padding: 5px"> <i class="fa fa-trash"></i></a>
+
                 </td>
             </tr>
 

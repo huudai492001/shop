@@ -51,10 +51,11 @@ Route::get('product', [ProductController::class, 'index'])->name('product.list')
 Route::get('product/create', [ProductController::class, 'create'])->name('product.create');
 Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
 Route::get('product/edit/{id}',[ProductController::class, 'edit'])->name('product.edit');
-Route::post('product/update', [ProductController::class, 'update'])->name('product.update');
+Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
-Route::get('product/details/{id}', [ProductController::class, 'extralDetails'])->name('product.extralDetails');
-Route::get('product/details/{id}', [ProductController::class, 'extralDetailsStore'])->name('product.extralDetailsStore');
+Route::get('product/details/{id}', [ProductController::class, 'extraDetails'])->name('details');
+Route::post('product/postdetails/{id}', [ProductController::class, 'extraDetailsStore'])->name('product.extraDetailsStore');
 
 
 

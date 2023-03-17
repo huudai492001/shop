@@ -78,7 +78,7 @@ class ProductController extends Controller
     {
         $id = $request->id;
         $product = Product::findOrFail($id);
-        $categories = Category::whereNotNull('category_id')->get();
+        $categories = Category::where('category_id')->get();
         return view('admin.product.edit', compact('product', 'categories'));
     }
 
@@ -92,12 +92,11 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $id = $request->id;
-
         $data = array(
 
             'name'=> $request->name,
             'category_id'=> $request->category_id,
-            'price'=>$request->price,
+            'price'=> $request->price
         );
         if ($request->hasFile('image')){
             $image = $request->file('image');
@@ -105,7 +104,8 @@ class ProductController extends Controller
             $image->move(public_path("/upload"), $fileName);
             $data['image'] = $fileName;
         }
-        $create = Product::where('id', $id)->update($data);
+//        dd($data);
+          $products = Product::where('id', $id)->update($data);
         return redirect()->route('product.list');
     }
 
@@ -115,30 +115,32 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(Product $product, Request $request)
     {
-        //
+        $id = $request->id;
+        $product = Product::where('id','=', $id)->delete();
+        return redirect()->back()->with('success' , 'Product delete success');
     }
 
-    public function extralDetails(Request $request){
+    public function extraDetails(Request $request){
         $id = $request->id;
-        $product = Product::where('id' ,$id)->with('ProductDetail');
-        return view('admin.product.extralDetails', compact('id', 'product'));
+
+        $product  = Product::find($id);
+        return view('admin.product.extraDetails', compact('product'));
     }
-    public function extralDetailsStore(Request $request){
+    public function extraDetailsStore(Request $request){
         $id = $request->id;
         $data =array(
           'title' => $request->title,
             'product_id' => $request ->id,
             'total_items' => $request->total_item,
-            'description' => $request->description,
+            'description' => $request->description
         );
         $details = ProductDetail::updateOrcreate(
             ['product_id' => $id],
             $data
-
-
         );
+        return redirect()->back()->with('success' , 'Detail Product success');
     }
 
 }

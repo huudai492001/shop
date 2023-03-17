@@ -95,7 +95,7 @@ class CategoryController extends Controller
 //        dd($data);
         $category = Category::find($id);
         $category->update($data);
-        return redirect()->route('admin.list');
+//        return redirect()->route('admin.list');
     }
 
     /**
