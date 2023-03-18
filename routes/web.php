@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ Route::get('specials_offer', [BaseController::class, 'specials_offer'])->name('s
 Route::get('delivery', [BaseController::class, 'delivery'])->name('delivery');
 Route::get('contact', [BaseController::class, 'contact'])->name('contact');
 Route::get('cart', [BaseController::class, 'cart'])->name('cart');
-Route::get('productView', [BaseController::class, 'productView'])->name('productView');
+Route::get('productView/{id}', [BaseController::class, 'productView'])->name('productView');
 
 // Admin controller
 Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
@@ -46,5 +47,15 @@ Route::post('category/update/{id}',[CategoryController::class, 'update'])->name(
 Route::post('category/delete',[CategoryController::class, 'destroy'])->name('admin.delete');
 
 
+//Product Controller
+Route::get('product', [ProductController::class, 'index'])->name('product.list');
+Route::get('product/create', [ProductController::class, 'create'])->name('product.create');
+Route::post('product/store', [ProductController::class, 'store'])->name('product.store');
+Route::get('product/edit/{id}',[ProductController::class, 'edit'])->name('product.edit');
+Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
+Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+
+Route::get('product/details/{id}', [ProductController::class, 'extraDetails'])->name('details');
+Route::post('product/postdetails/{id}', [ProductController::class, 'extraDetailsStore'])->name('product.extraDetailsStore');
 
 

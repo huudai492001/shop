@@ -31,7 +31,6 @@ class ProductController extends Controller
     {
         $categories = Category::whereNull('category_id')->get();
         return view('admin.product.add', compact('categories'));
-
     }
 
     /**
@@ -54,7 +53,8 @@ class ProductController extends Controller
             $data['image'] = $fileName;
         }
         $create = Product::create($data);
-        return redirect()->route('product.create');
+//        return redirect()->route('product.create');
+        return redirect()->back()->with('success' , 'Product add success');
     }
 
     /**

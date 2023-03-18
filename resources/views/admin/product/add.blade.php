@@ -25,11 +25,15 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>Form Design <small>different form elements</small></h2>
-
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
                             <br />
+                            @if(Session::has('success'))
+                                <div class="alert alert-success" role="alert">
+                                    {{Session::get('success')}}
+                                </div>
+                            @endif
                             <form id="demo-form2" action="{{route('product.store')}}" method="post" enctype="multipart/form-data"
                                   data-parsley-validate class="form-horizontal form-label-left">
                                 @csrf
