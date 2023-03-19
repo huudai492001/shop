@@ -34,7 +34,13 @@
                         <label class="control-label"><span>${{$product->price}}</span></label>
                         <div class="controls">
                             <input type="number" class="span1" placeholder="Qty."/>
-                            <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                            <input type="hidden" value="{{$product->id}}" name="product_id">
+                            @if(\Illuminate\Support\Facades\Auth::user())
+                                <button type="submit" class="btn btn-large btn-primary pull-right"> Add to cart <i class=" icon-shopping-cart"></i></button>
+                            @else
+                                <a href="{{route('user_login')}}" class="btn btn-large btn-primary pull-right"> Add  <i class=" icon-shopping-cart"></i></a>
+
+                            @endif
                         </div>
                     </div>
                 </form>

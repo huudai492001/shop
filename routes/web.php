@@ -5,6 +5,7 @@ use App\Http\Controllers\BaseController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,19 @@ Route::get('product/edit/{id}',[ProductController::class, 'edit'])->name('produc
 Route::post('product/update/{id}', [ProductController::class, 'update'])->name('product.update');
 Route::get('product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
 
+//Product Controller detail
 Route::get('product/details/{id}', [ProductController::class, 'extraDetails'])->name('details');
 Route::post('product/postdetails/{id}', [ProductController::class, 'extraDetailsStore'])->name('product.extraDetailsStore');
+
+//Login user
+Route::get('user/login', [BaseController::class, 'user_login'])->name('user_login');
+Route::get('user/logout', [BaseController::class, 'log_out'])->name('user_logout');
+Route::post('user/register', [BaseController::class, 'user_store'])->name('user_store');
+//Check login
+Route::post('user/login', [BaseController::class, 'check_login'])->name('user_login_store');
+
+//User Controller
+Route::get('admin/user', [UserController::class, 'index'])->name('admin.user');
+Route::get('admin/delete/{id}', [UserController::class, 'destroy'])->name('product.delete');
 
 

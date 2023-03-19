@@ -47,6 +47,13 @@
                 </ul>
             </li>
         </ul>
+        <ul class="nav side-menu">
+            <li><a><i class="fa fa-home"></i> User Manager <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{route('admin.user')}}">User List</a></li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>
 
